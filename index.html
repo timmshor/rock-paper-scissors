@@ -6,10 +6,16 @@
 
 <body>
 
-<p>Welcome to a friendly game of <a href=https://en.wikipedia.org/wiki/Rock–paper–scissors>rock, paper, scissors</a>!</p><br>
+<h2>
+  <p>Welcome to a friendly game of <a href=https://en.wikipedia.org/wiki/Rock–paper–scissors>rock, paper, scissors</a>!</p><br>
+</h2>
+<h5>
 <p>Psychological tricks and game theory won't work on me!</p><br>
-<p>Head to the console and enter "game()" to start playing.</p>
+</h5>
+<button type="button" onclick=game()>
+Click me to play best of 5 games!</button>
 <p id="round"></p>
+<p id="result"></p>
 
 <script>
   function game() {
@@ -52,8 +58,13 @@
     let score = "";
     while (playersWins < 3 & computersWins < 3) {
       playRound();
-      score += "<br>You have " + playersWins + " wins against my " + computersWins + " wins.";
+      score = "<br>Your wins: " + playersWins + " | My wins: " + computersWins;
       document.getElementById("round").innerHTML = score;
+      if (playersWins > computersWins) {
+        document.getElementById("result").innerHTML = "You win this time!";
+      } else {
+        document.getElementById("result").innerHTML = "I win this time!";
+      }
     }
   }
 </script>
