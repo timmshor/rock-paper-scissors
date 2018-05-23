@@ -8,65 +8,55 @@
 
 <p>Welcome to a friendly game of <a href=https://en.wikipedia.org/wiki/Rock–paper–scissors>rock, paper, scissors</a>!</p><br>
 <p>Psychological tricks and game theory won't work on me!</p><br>
-<p>Enter your selection to play.</p><br>
-  <form name="playerChoice" onsubmit="determineWinner()">
-    <input type="text" name="playerChoice" autofocus>
-    <input type="submit" value="Good luck!" onsubmit="determineWinner()">
-  </form>
+<p>Head to the console and enter "game()" to start playing.</p>
 <p id="round"></p>
 
-  <script>
-  function computerPlay() {
-    let x = Math.random();
-    let comPlay;
-    if (x > 0 & x < 1/3) {
-      comPlay = "Rock";
-    } else if (x > 1/3 & x < 2/3) {
-      comPlay = "Paper";
-    } else {
-      comPlay = "Scissors";
-    }
-    return comPlay;
-  }
-
-  function determineWinner(playerSelection, computerSelection) {
-    initialPlayerSelection = document.forms["playerChoice"]["playerChoice"].value;
-    firstLetterPlayerSelection = initialPlayerSelection[0].toUpperCase();
-    restOfPlayerSelection = initialPlayerSelection.substr(1, );
-    playerSelection = firstLetterPlayerSelection + restOfPlayerSelection.toLowerCase();
-    computerSelection = computerPlay();
-    if (playerSelection !== "Rock" & playerSelection !== "Paper" & playerSelection !== "Scissors") {
+<script>
+  function game() {
+    let playersWins = 0;
+    let computersWins = 0;
+    function playRound(playerSelection, computerSelection) {
+      function userPlay() {
+        initialPlayerSelection = prompt("Make a choice: rock, paper, or scissors.", "");
+        let firstLetterPlayerSelection = initialPlayerSelection[0].toUpperCase();
+        let restOfPlayerSelection = initialPlayerSelection.substr(1, );
+        playerSelection = firstLetterPlayerSelection + restOfPlayerSelection.toLowerCase();
+        return playerSelection;
+      }
+      function computerPlay() {
+        let x = Math.random();
+        let comPlay;
+        if (x > 0 & x < 1/3) {
+          comPlay = "Rock";
+        } else if (x > 1/3 & x < 2/3) {
+          comPlay = "Paper";
+        } else {
+          comPlay = "Scissors";
+        }
+        return comPlay;
+      }
+      playerSelection = userPlay();
+      computerSelection = computerPlay();
+      if (playerSelection !== "Rock" & playerSelection !== "Paper" & playerSelection !== "Scissors") {
         alert ("That is not a valid option!");
-    } else if (playerSelection == computerSelection) {
-      alert ("It's a tie! " + playerSelection + " ties " + computerSelection + ".");
-      return "Tie!"
-    } else if ((playerSelection == "Paper" & computerSelection == "Rock") || (playerSelection == "Rock" & computerSelection == "Scissors") || (playerSelection == "Scissors" & computerSelection == "Paper")) {
-      alert ("You win! " + playerSelection + " beats " + computerSelection + ".");
-      return "Player wins!"
-    } else {
-      alert ("You lose! " + computerSelection + " beats " + playerSelection + ".");
-      return "Computer wins!"
+      } else if (playerSelection == computerSelection) {
+        alert ("It's a tie! " + playerSelection + " ties " + computerSelection + ".");
+      } else if ((playerSelection == "Paper" & computerSelection == "Rock") || (playerSelection == "Rock" & computerSelection == "Scissors") || (playerSelection == "Scissors" & computerSelection == "Paper")) {
+        playersWins ++;
+        alert ("You win! " + playerSelection + " beats " + computerSelection + ".");
+      } else {
+        computersWins ++;
+        alert ("You lose! " + computerSelection + " beats " + playerSelection + ".");
+      }
+    }
+    let score = "";
+    while (playersWins < 3 & computersWins < 3) {
+      playRound();
+      score += "<br>You have " + playersWins + " wins against my " + computersWins + " wins.";
+      document.getElementById("round").innerHTML = score;
     }
   }
-
-  //This function needs work and should do a best of 5 game of paper, rock, scissors. function game() {
-    //let playersWins = 0;
-    //let computersWins = 0;
-    //let score = "You have " + playersWins + "wins against my " + computersWins + " wins.";
-    //while (playersWins < 3 || computersWins < 3) {
-      //determineWinner();
-      //if ("Player wins!") {
-        //playersWins = playersWins + 1;
-        //document.getElementById("round").innerHTML = score;
-      //} else if ("Computer wins!") {
-        //computersWins = computersWins + 1;
-        //document.getElementById("round").innerHTML = score;
-      //} else {
-        //document.getElementById("round").innerHTML = score;
-      //}
-    //}
-  //}
-  </script>
+</script>
 
 </body>
 </html>
